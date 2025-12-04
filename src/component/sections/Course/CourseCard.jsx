@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const CourseCard = ({ course }) => {
-  const [isHovered, setIsHovered] = useState(false)
+  const navigate = useNavigate()
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const { level, category, title, description, duration, students, rating, price, originalPrice, lessons, imageSrc } = course
+  const { id, level, category, title, description, duration, students, rating, price, originalPrice, lessons, imageSrc } = course
 
   const toggleDescription = () => {
     setIsExpanded(!isExpanded)
@@ -16,23 +17,14 @@ const CourseCard = ({ course }) => {
 
   return (
     <div 
-      className="bg-[#11161b] rounded-2xl overflow-hidden shadow-lg border-2 border-green-500 transition-all duration-300 h-full flex flex-col relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        transform: isHovered ? 'translateY(-8px) scale(1.02)' : 'translateY(0) scale(1)',
-        boxShadow: isHovered ? '0 20px 40px rgba(34, 197, 94, 0.3)' : '0 4px 6px rgba(0, 0, 0, 0.1)'
-      }}
+      className="bg-[#11161b] rounded-2xl overflow-hidden shadow-lg border-2 border-gray-700 hover:border-green-500 transition-all duration-300 h-full flex flex-col relative"
     >
       {/* Image Container */}
       <div className="relative overflow-hidden">
         <img 
           src={imageSrc} 
           alt={title} 
-          className="h-48 sm:h-56 w-full object-cover transition-transform duration-500"
-          style={{
-            transform: isHovered ? 'scale(1.1)' : 'scale(1)'
-          }}
+          className="h-48 sm:h-56 w-full object-cover transition-transform duration-500 hover:scale-110"
         />
         <div className="absolute top-3 left-3 right-3 flex justify-between">
           <span className={`${level === 'Intermediate' ? 'bg-yellow-500 text-black' : 'bg-red-600 text-white'} text-xs sm:text-sm font-semibold px-3 py-1 rounded-full backdrop-blur-sm`}>
@@ -98,7 +90,10 @@ const CourseCard = ({ course }) => {
           50% off! One-time payment
         </p>
         
-        <button className="w-full bg-green-500 hover:bg-green-600 text-black font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden">
+        <button 
+          onClick={() => navigate(`/course/${id}`)}
+          className="w-full bg-green-500 hover:bg-green-600 text-black font-semibold py-3 rounded-xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden"
+        >
           <span className="relative z-10 group-hover:text-white transition-colors duration-300">
             View Details
           </span>

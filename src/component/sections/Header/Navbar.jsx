@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation()
 
   // Handle scroll effect
   useEffect(() => {
@@ -29,8 +30,8 @@ const Navbar = () => {
 
       {/* Desktop Menu */}
       <ul className="hidden md:flex space-x-6 font-medium items-center">
-        <li><a href="#" className="hover:text-green-500">Home</a></li>
-        <li><a href="#" className="hover:text-green-500">Courses</a></li>
+        <li><Link to="/" className={`hover:text-green-500 ${location.pathname === '/' ? 'text-green-500 underline' : ''}`}>Home</Link></li>
+        <li><Link to="/courses" className={`hover:text-green-500 ${location.pathname === '/courses' ? 'text-green-500 underline' : ''}`}>Courses</Link></li>
         <li><a href="#" className="hover:text-green-500">Learning center</a></li>
         <li><a href="#" className="hover:text-green-500">Instructors</a></li>
         <li><a href="#" className="hover:text-green-500">Leaderboard</a></li>
@@ -51,8 +52,8 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-white shadow-lg md:hidden">
           <ul className="flex flex-col space-y-4 p-6">
-            <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Home</a></li>
-            <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Courses</a></li>
+            <li><Link to="/" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/' ? 'text-green-500 underline' : ''}`}>Home</Link></li>
+            <li><Link to="/courses" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/courses' ? 'text-green-500 underline' : ''}`}>Courses</Link></li>
             <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Learning center</a></li>
             <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Instructors</a></li>
             <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Leaderboard</a></li>

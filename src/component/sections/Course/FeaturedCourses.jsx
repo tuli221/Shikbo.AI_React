@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import CourseCard from './CourseCard'
-import { coursesData } from '../../../data/coursesData.js'
+import { coursesData } from '../../../data/coursesData'
 
 const FeaturedCourses = () => {
+  const navigate = useNavigate()
   const [counts, setCounts] = useState({
     students: 0,
     courses: 0,
@@ -49,10 +51,10 @@ const FeaturedCourses = () => {
   return (
     <>
       {/* Featured Courses Section */}
-      <section className="flex flex-col md:flex-row items-center justify-center px-8 md:px-16 py-10 backdrop-blur-md rounded-xl shadow-md m-10 bg-green-50" id="courses">
+      <section className="flex flex-col md:flex-row items-center justify-center px-8 md:px-16 py-10 backdrop-blur-md rounded-xl shadow-md mx-10 -mt-6 bg-green-50" id="courses">
         <div>
           {/* Background box */}
-          <div className="rounded-3xl">
+          <div className="rounded-3xl -mt-4">
             <h1 className="text-4xl font-bold mb-3 text-black-400 text-center py-0">Featured Courses</h1>
             <p className="text-black-400 font-bold text-lg max-w-2xl mx-auto text-center mb-2">
               Start your journey with our most popular and highly-rated courses.
@@ -60,7 +62,7 @@ const FeaturedCourses = () => {
           </div>
 
           {/* Courses Grid */}
-          <div className="max-w-20xl mx-auto py-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-10">
+          <div className="max-w-20xl mx-auto py-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-10">
             {coursesData.slice(0, 3).map(course => (
               <CourseCard key={course.id} course={course} />
             ))}
@@ -68,7 +70,10 @@ const FeaturedCourses = () => {
 
           {/* View All Button */}
           <div className="flex items-center justify-center">
-            <button className="bg-black-500 hover:white-600 bg-green-600 hover:bg-green-500 text-lg text-black font-bold px-6 py-2 mt-2 rounded-xl transition">
+            <button 
+              onClick={() => navigate('/courses')}
+              className="bg-black-500 hover:white-600 bg-green-600 hover:bg-green-500 text-lg text-black font-bold px-6 py-2 mt-2 rounded-xl transition"
+            >
               View all courses<i className="fa-solid fa-arrow-right ml-2"></i>
             </button>
           </div>

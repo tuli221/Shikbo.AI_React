@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const ChatButton = () => {
-  const [isOpen, setIsOpen] = useState(false)
+const ChatButton = ({ isOpen, setIsOpen }) => {
   const [message, setMessage] = useState('')
   const [chatHistory, setChatHistory] = useState([])
   const [isTyping, setIsTyping] = useState(false)
@@ -65,7 +64,7 @@ const ChatButton = () => {
         isOpen ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95 pointer-events-none'
       } z-50`}>
         {/* Chat Header */}
-        <div className="bg-gradient-to-r from-green-700 via-green-400 to-green-700text-white p-4 rounded-t-2xl flex items-center justify-between">
+        <div className="bg-gradient-to-r from-green-700 via-green-400 to-green-700 text-white p-4 rounded-t-2xl flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
               <i className="fa-solid fa-robot"></i>
@@ -103,7 +102,7 @@ const ChatButton = () => {
               <div
                 className={`max-w-xs lg:max-w-sm rounded-2xl p-3 ${
                   msg.type === 'user'
-                    ? 'bg-primary text-white rounded-br-none'
+                    ? 'bg-green-500 text-white rounded-br-none'
                     : 'bg-gray-200 text-gray-800 rounded-bl-none'
                 }`}
               >

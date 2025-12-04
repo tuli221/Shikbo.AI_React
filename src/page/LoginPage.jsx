@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -7,6 +7,7 @@ const LoginPage = () => {
     email: '',
     password: ''
   })
+  const navigate = useNavigate()
 
   const handleInputChange = (e) => {
     const { id, value } = e.target
@@ -19,7 +20,8 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('Login submitted:', formData)
-    // Add your login logic here
+    // Navigate to admin dashboard after login
+    navigate('/admin/dashboard')
   }
 
   const togglePasswordVisibility = () => {
