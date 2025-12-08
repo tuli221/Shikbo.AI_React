@@ -11,7 +11,7 @@ const AdminLayout = () => {
 
   const navLinks = [
     { path: '/admin/dashboard', label: 'Dashboard', icon: '📊' },
-    { path: '/admin/users', label: 'Users', icon: '👥' },
+    { path: '/admin/users', label: 'Students', icon: '👥' },
     { path: '/admin/instructors', label: 'Instructors', icon: '👩‍🏫' },
     { path: '/admin/courses', label: 'Courses', icon: '📚' },
     { path: '/admin/payments', label: 'Payments', icon: '💳' },
@@ -19,17 +19,17 @@ const AdminLayout = () => {
   ]
 
   return (
-    <div className="min-h-screen flex bg-white">
+    <div className="min-h-screen flex bg-gray-50">
       {/* SIDEBAR */}
       <aside
-        className={`w-68 bg-white border-r shadow-lg p-6 space-y-6 fixed md:static inset-y-0 left-0 z-20 transform ${
+        className={`w-64 bg-white border-r shadow-lg p-6 space-y-6 fixed md:relative inset-y-0 left-0 z-20 transform ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } md:translate-x-0 transition-all duration-300`}
       >
         {/* Logo */}
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
-            <img src="/assets/download Shikbo.png" alt="Shikbo.AI" className="h-10 rounded-md" />
+            <img src="/assets/downloadShikbo.png" alt="Shikbo.AI" className="h-10 rounded-md" />
           </Link>
           <button
             onClick={() => setSidebarOpen(false)}

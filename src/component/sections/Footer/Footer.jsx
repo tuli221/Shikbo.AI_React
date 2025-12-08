@@ -8,7 +8,7 @@ const Footer = () => {
         {/* Left Section */}
         <div>
           <div className="max-w-9xl mx-auto">
-            <img src="./assets/Shikbobg.png" alt="Shikhbo.AI Logo" className="h-10" />
+            <img src="/assets/Shikbowhite.png" alt="Shikhbo.AI Logo" className="h-10" />
           </div>
           <p className="text-gray-400 mb-6 leading-relaxed">
             Empowering students with AI-powered personalized tech education. Learn programming, AI, and cutting-edge technologies with expert guidance from Shikhbo.AI.

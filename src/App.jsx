@@ -10,14 +10,16 @@ import CoursesPage from './page/CoursesPage'
 import CourseCard from './component/sections/Course/CourseCard'
 import AdminLayout from './page/admin/AdminLayout'
 import DashboardPage from './page/admin/DashboardPage'
-import UsersPage from './page/admin/UsersPage'
-import InstructorsPage from './page/admin/InstructorsPage'
+import UsersPage from './page/admin/StudentPage'
+import AdminInstructorsPage from './page/admin/InstructorsPage'
 import AdminCoursesPage from './page/admin/AdminCoursesPage'
 import PaymentsPage from './page/admin/PaymentsPage'
 import AnalyticsPage from './page/admin/AnalyticsPage'
 import AddCoursePage from './page/admin/AddCoursePage'
-import InstructorDashboard from './page/instructor/InstructorDashboard'
 import StudentDashboard from './page/student/StudentDashboard'
+import LeaderboardPage from './page/LeaderboardPage'
+import PublicInstructorsPage from './page/InstructorsPage'
+import InstructorDashboard from './page/instructor/InstructorDashboard'
 
 // Import shared styles (optional) and barrel exports for pages/components
 
@@ -32,24 +34,39 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/course/:courseId" element={<CourseDetailsPage />} />
-        
-        {/* Instructor Routes */}
-        <Route path="/instructor/dashboard" element={<InstructorDashboard />} />
-        
-        {/* Student Routes */}
-        <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
+        <Route path="/instructors" element={<PublicInstructorsPage />} />
         
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<DashboardPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="users" element={<UsersPage />} />
-          <Route path="instructors" element={<InstructorsPage />} />
+          <Route path="instructors" element={<AdminInstructorsPage />} />
           <Route path="courses" element={<AdminCoursesPage />} />
           <Route path="courses/add" element={<AddCoursePage />} />
           <Route path="payments" element={<PaymentsPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />
         </Route>
+        {/* Instructor Routes */}
+        <Route path="/instructor/dashboard" element={<InstructorDashboard />} />
+        <Route path="/instructor/my-courses" element={<InstructorDashboard />} />
+        <Route path="/instructor/create-course" element={<InstructorDashboard />} />
+        <Route path="/instructor/students" element={<InstructorDashboard />} />
+        <Route path="/instructor/payments" element={<InstructorDashboard />} />
+        <Route path="/instructor/messages" element={<InstructorDashboard />} />
+        <Route path="/instructor/profile" element={<InstructorDashboard />} />
+
+        {/* Student Routes */}
+        <Route path="/student/dashboard" element={<StudentDashboard />} />
+        <Route path="/student/my-courses" element={<StudentDashboard />} />
+        <Route path="/student/quizzes" element={<StudentDashboard />} />
+        <Route path="/student/live-sessions" element={<StudentDashboard />} />
+        <Route path="/student/leaderboard" element={<StudentDashboard />} />
+        <Route path="/student/community" element={<StudentDashboard />} />
+        <Route path="/student/settings" element={<StudentDashboard />} />
+
+        
       </Routes>
     </BrowserRouter>
   )

@@ -58,9 +58,9 @@ const Students = () => {
   )
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
-        <h3 className="text-xl md:text-2xl font-bold">Students</h3>
+        <h3 className="text-xl md:text-2xl font-bold text-gray-800">Students</h3>
         <input
           type="text"
           placeholder="Search students..."

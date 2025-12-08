@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import MyCourses from './MyCourses'
 import CreateCourse from './CreateCourse'
 import Students from './Students'
 import Payments from './Payments'
 import Messages from './Messages'
-import Settings from './Settings'
+import Profile from './Profile'
 
 const InstructorDashboard = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [activeTab, setActiveTab] = useState('dashboard')
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false)
+
+  const isActive = (path) => location.pathname === path
 
   const recentCourses = [
     {
@@ -42,17 +47,18 @@ const InstructorDashboard = () => {
     setIsSidebarOpen(false)
   }
 
-  const handleTabChange = (tab) => {
-    setActiveTab(tab)
-    if (isSidebarOpen) {
-      closeSidebar()
-    }
-  }
-
   const renderContent = () => {
-    switch (activeTab) {
-      case 'dashboard':
-        return (
+    const path = location.pathname
+    
+    if (path === '/instructor/my-courses') return <MyCourses />
+    if (path === '/instructor/create-course') return <CreateCourse />
+    if (path === '/instructor/students') return <Students />
+    if (path === '/instructor/payments') return <Payments />
+    if (path === '/instructor/messages') return <Messages />
+    if (path === '/instructor/profile') return <Profile />
+    
+    // Default dashboard content
+    return (
           <>
             {/* TOP STATS CARDS */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 mb-6 md:mb-10">
@@ -133,28 +139,6 @@ const InstructorDashboard = () => {
             </div>
           </>
         )
-      
-      case 'courses':
-        return <MyCourses />
-      
-      case 'create':
-        return <CreateCourse />
-      
-      case 'students':
-        return <Students />
-      
-      case 'payments':
-        return <Payments />
-      
-      case 'messages':
-        return <Messages />
-      
-      case 'settings':
-        return <Settings />
-      
-      default:
-        return null
-    }
   }
 
   return (
@@ -169,7 +153,7 @@ const InstructorDashboard = () => {
         {/* Logo */}
         <div className="flex items-center justify-between">
           <a className="flex items-center gap-3">
-            <img src="./assets/download Shikbo.png" className="h-10 rounded-md" alt="Shikbo.AI" />
+            <img src="/assets/downloadShikbo.png" className="h-10 rounded-md" alt="Shikbo.AI" />
           </a>
           <button onClick={closeSidebar} className="md:hidden text-gray-600 text-2xl">
             ✖
@@ -179,66 +163,57 @@ const InstructorDashboard = () => {
         {/* Nav Links */}
         <nav className="space-y-1 text-black font-medium">
           <button 
-            onClick={() => handleTabChange('dashboard')}
+            onClick={() => navigate('/instructor/dashboard')}
             className={`flex items-center gap-3 p-3 rounded-lg transition cursor-pointer w-full text-left ${
-              activeTab === 'dashboard' ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
+              isActive('/instructor/dashboard') ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
             }`}
           >
             <span>📊</span>Dashboard
           </button>
 
           <button 
-            onClick={() => handleTabChange('courses')}
+            onClick={() => navigate('/instructor/my-courses')}
             className={`flex items-center gap-3 p-3 rounded-lg transition cursor-pointer w-full text-left ${
-              activeTab === 'courses' ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
+              isActive('/instructor/my-courses') ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
             }`}
           >
             <span>📚</span>My Courses
           </button>
 
           <button 
-            onClick={() => handleTabChange('create')}
+            onClick={() => navigate('/instructor/create-course')}
             className={`flex items-center gap-3 p-3 rounded-lg transition cursor-pointer w-full text-left ${
-              activeTab === 'create' ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
+              isActive('/instructor/create-course') ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
             }`}
           >
             <span>➕</span>Create Course
           </button>
 
           <button 
-            onClick={() => handleTabChange('students')}
+            onClick={() => navigate('/instructor/students')}
             className={`flex items-center gap-3 p-3 rounded-lg transition cursor-pointer w-full text-left ${
-              activeTab === 'students' ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
+              isActive('/instructor/students') ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
             }`}
           >
             <span>👨‍🎓</span>Students
           </button>
 
           <button 
-            onClick={() => handleTabChange('payments')}
+            onClick={() => navigate('/instructor/payments')}
             className={`flex items-center gap-3 p-3 rounded-lg transition cursor-pointer w-full text-left ${
-              activeTab === 'payments' ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
+              isActive('/instructor/payments') ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
             }`}
           >
             <span>💳</span>Payments
           </button>
 
           <button 
-            onClick={() => handleTabChange('messages')}
+            onClick={() => navigate('/instructor/messages')}
             className={`flex items-center gap-3 p-3 rounded-lg transition cursor-pointer w-full text-left ${
-              activeTab === 'messages' ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
+              isActive('/instructor/messages') ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
             }`}
           >
             <span>💬</span>Messages
-          </button>
-
-          <button 
-            onClick={() => handleTabChange('settings')}
-            className={`flex items-center gap-3 p-3 rounded-lg transition cursor-pointer w-full text-left ${
-              activeTab === 'settings' ? 'bg-green-100 text-green-600' : 'hover:bg-green-100 hover:text-green-600'
-            }`}
-          >
-            <span>⚙️</span>Settings
           </button>
         </nav>
       </aside>
@@ -251,15 +226,54 @@ const InstructorDashboard = () => {
             <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800">Instructor Dashboard</h2>
           </div>
 
-          <div className="flex items-center gap-3 md:gap-4 bg-white shadow-md px-3 md:px-4 py-2 rounded-full">
-            <div className="text-right hidden sm:block">
-              <p className="font-semibold text-sm md:text-base">Shikbo Instructor</p>
-            </div>
-            <img
-              src="https://api.dicebear.com/6.x/initials/svg?seed=SI"
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full"
-              alt="Instructor"
-            />
+          <div className="relative">
+            <button 
+              onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+              className="flex items-center gap-3 md:gap-4 bg-white shadow-md px-3 md:px-4 py-2 rounded-full hover:shadow-lg transition"
+            >
+              <div className="text-right hidden sm:block">
+                <p className="font-semibold text-sm md:text-base">Shikbo Instructor</p>
+              </div>
+              <img
+                src="https://api.dicebear.com/6.x/initials/svg?seed=SI"
+                className="w-8 h-8 md:w-10 md:h-10 rounded-full"
+                alt="Instructor"
+              />
+            </button>
+
+            {/* Dropdown Menu */}
+            {showProfileDropdown && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-2 z-50">
+                <button
+                  onClick={() => {
+                    navigate('/instructor/profile')
+                    setShowProfileDropdown(false)
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-2 text-gray-700 hover:bg-gray-100 transition"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <span>My Profile</span>
+                </button>
+
+                <div className="border-t border-gray-100 my-1"></div>
+
+                <button
+                  onClick={() => {
+                    console.log('Logging out...')
+                    navigate('/login')
+                    setShowProfileDropdown(false)
+                  }}
+                  className="w-full flex items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50 transition"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                  </svg>
+                  <span>Logout</span>
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

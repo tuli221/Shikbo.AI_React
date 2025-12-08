@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const MyCourses = () => {
+  const navigate = useNavigate()
   const [courses] = useState([
     {
       id: 1,
@@ -44,7 +46,10 @@ const MyCourses = () => {
     <div>
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-6">
         <h3 className="text-xl md:text-2xl font-bold">My Courses</h3>
-        <button className="px-4 md:px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg font-semibold transition text-sm md:text-base w-full sm:w-auto">
+        <button 
+          onClick={() => navigate('/instructor/create-course')}
+          className="px-4 md:px-6 py-2 bg-green-600 hover:bg-green-600 text-white rounded-lg font-semibold transition text-sm md:text-base w-full sm:w-auto"
+        >
           + Create New Course
         </button>
       </div>

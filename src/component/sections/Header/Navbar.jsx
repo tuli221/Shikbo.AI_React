@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({ hideLogin = false }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
@@ -25,7 +25,7 @@ const Navbar = () => {
     <nav className="flex justify-between items-center px-8 py-5 bg-white/80 shadow-md sticky top-0 z-50 backdrop-blur-sm">
       {/* Logo */}
       <div className="flex items-center">
-        <img src="/assets/download Shikbo.png" alt="Shikhbo.AI Logo" className="h-10" />
+        <img src="/assets/downloadShikbo.png" alt="Shikhbo.AI Logo" className="h-10" />
       </div>
 
       {/* Desktop Menu */}
@@ -33,11 +33,13 @@ const Navbar = () => {
         <li><Link to="/" className={`hover:text-green-500 ${location.pathname === '/' ? 'text-green-500 underline' : ''}`}>Home</Link></li>
         <li><Link to="/courses" className={`hover:text-green-500 ${location.pathname === '/courses' ? 'text-green-500 underline' : ''}`}>Courses</Link></li>
         <li><a href="#" className="hover:text-green-500">Learning center</a></li>
-        <li><a href="#" className="hover:text-green-500">Instructors</a></li>
-        <li><a href="#" className="hover:text-green-500">Leaderboard</a></li>
-        <Link to="/login" className="bg-[var(--primary)] text-white px-4 py-2 rounded-lg hover:bg-green-500 transition">
-          <span className="font-semibold">Log in</span>
-        </Link>
+        <li><Link to="/instructors" className={`hover:text-green-500 ${location.pathname === '/instructors' ? 'text-green-500 underline' : ''}`}>Instructors</Link></li>
+        <li><Link to="/leaderboard" className={`hover:text-green-500 ${location.pathname === '/leaderboard' ? 'text-green-500 underline' : ''}`}>Leaderboard</Link></li>
+        {!hideLogin && (
+          <Link to="/login" className="bg-[var(--primary)] text-white px-4 py-2 rounded-lg hover:bg-green-500 transition">
+            <span className="font-semibold">Log in</span>
+          </Link>
+        )}
       </ul>
 
       {/* Mobile Menu Button */}
@@ -55,11 +57,13 @@ const Navbar = () => {
             <li><Link to="/" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/' ? 'text-green-500 underline' : ''}`}>Home</Link></li>
             <li><Link to="/courses" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/courses' ? 'text-green-500 underline' : ''}`}>Courses</Link></li>
             <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Learning center</a></li>
-            <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Instructors</a></li>
-            <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Leaderboard</a></li>
-            <Link to="/login" className="bg-[var(--primary)] text-white px-4 py-2 rounded-lg hover:bg-green-500 transition text-center">
-              <span className="font-semibold">Log in</span>
-            </Link>
+            <li><Link to="/instructors" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/instructors' ? 'text-green-500 underline' : ''}`}>Instructors</Link></li>
+            <li><Link to="/leaderboard" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/leaderboard' ? 'text-green-500 underline' : ''}`}>Leaderboard</Link></li>
+            {!hideLogin && (
+              <Link to="/login" className="bg-[var(--primary)] text-white px-4 py-2 rounded-lg hover:bg-green-500 transition text-center">
+                <span className="font-semibold">Log in</span>
+              </Link>
+            )}
           </ul>
         </div>
       )}

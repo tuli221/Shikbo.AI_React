@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const InstructorsPage = () => {
+const StudentPage = () => {
+  const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState('')
   const [showAddModal, setShowAddModal] = useState(false)
   const [formData, setFormData] = useState({
@@ -8,69 +10,24 @@ const InstructorsPage = () => {
     email: '',
     password: '',
     phone: '',
-    age: '',
-    expertise: '',
-    bio: '',
-    status: 'Pending'
+    course: '',
+    status: 'Active',
+    enrollmentDate: '',
+    address: ''
   })
   
-  const [instructors] = useState([
-    {
-      id: 1,
-      name: 'Shaikot Kundu Akash',
-      email: 'shaikot@gmail.com',
-      expertise: 'Full-stack developer',
-      courses: 5,
-      students: 123,
-      rating: 4.8,
-      status: 'Approved'
-    },
-    {
-      id: 2,
-      name: 'Ahmed Shakil',
-      email: 'shakil@gmail.com',
-      expertise: 'Web Development',
-      courses: 3,
-      students: 256,
-      rating: 4.9,
-      status: 'Approved'
-    },
-    {
-      id: 3,
-      name: 'Sumaiya Badhon',
-      email: 'sumaiya@gmail.com',
-      expertise: 'Data Science',
-      courses: 4,
-      students: 992,
-      rating: 4.9,
-      status: 'Pending'
-    },
-    {
-      id: 4,
-      name: 'Tania Mia',
-      email: 'tania@gmail.com',
-      expertise: 'Mobile Development',
-      courses: 5,
-      students: 723,
-      rating: 4.7,
-      status: 'Approved'
-    },
-    {
-      id: 5,
-      name: 'Arif Rahman',
-      email: 'arif@gmail.com',
-      expertise: 'Cloud Computing',
-      courses: 3,
-      students: 512,
-      rating: 4.5,
-      status: 'Approved'
-    }
+  const [users] = useState([
+    { id: 1, name: 'Bob', email: 'bob@example.com', course: 'AI Fundamentals', status: 'Active' },
+    { id: 2, name: 'Mim', email: 'mim@example.com', course: 'Web Dev', status: 'Pending' },
+    { id: 3, name: 'Sarah Khan', email: 'sarah@example.com', course: 'Data Science', status: 'Active' },
+    { id: 4, name: 'John Doe', email: 'john@example.com', course: 'Machine Learning', status: 'Inactive' },
+    { id: 5, name: 'Alice Wong', email: 'alice@example.com', course: 'Web Dev', status: 'Active' }
   ])
 
-  const filteredInstructors = instructors.filter(
-    (instructor) =>
-      instructor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      instructor.expertise.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   const handleInputChange = (e) => {
@@ -83,29 +40,29 @@ const InstructorsPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Instructor data:', formData)
-    // Add your instructor creation logic here
+    console.log('Student data:', formData)
+    // Add your student creation logic here
     setShowAddModal(false)
     setFormData({
       name: '',
       email: '',
       password: '',
       phone: '',
-      age: '',
-      expertise: '',
-      bio: '',
-      status: 'Pending'
+      course: '',
+      status: 'Active',
+      enrollmentDate: '',
+      address: ''
     })
   }
 
   return (
     <div className="bg-white p-8 rounded-2xl shadow">
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-2xl font-semibold">Instructors</h3>
+        <h3 className="text-2xl font-semibold">All Users</h3>
         <div className="flex items-center gap-2">
           <input
             type="text"
-            placeholder="Search instructor..."
+            placeholder="Search user..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="px-3 py-2 border rounded-lg text-sm"
@@ -114,83 +71,71 @@ const InstructorsPage = () => {
             onClick={() => setShowAddModal(true)}
             className="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm shadow"
           >
-            + Add Instructor
+            + Add New Student
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredInstructors.map((instructor) => (
-          <div
-            key={instructor.id}
-            className="border rounded-xl p-6 hover:shadow-lg transition-shadow"
-          >
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <h4 className="font-semibold text-lg">{instructor.name}</h4>
-                <p className="text-sm text-gray-600">{instructor.email}</p>
-              </div>
-              <span
-                className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                  instructor.status === 'Approved'
-                    ? 'bg-green-100 text-green-600'
-                    : 'bg-yellow-100 text-yellow-600'
-                }`}
-              >
-                {instructor.status}
-              </span>
-            </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="text-sm text-black border-b bg-gray-50">
+              <th className="p-3">ID</th>
+              <th className="p-3">Name</th>
+              <th className="p-3">Email</th>
+              <th className="p-3">Course</th>
+              <th className="p-3">Status</th>
+              <th className="p-3">Actions</th>
+            </tr>
+          </thead>
 
-            <div className="mb-4">
-              <p className="text-sm font-medium text-green-600">{instructor.expertise}</p>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 mb-4 text-center">
-              <div>
-                <p className="text-lg font-bold text-green-600">{instructor.courses}</p>
-                <p className="text-xs text-gray-500">Courses</p>
-              </div>
-              <div>
-                <p className="text-lg font-bold text-green-600">{instructor.students}</p>
-                <p className="text-xs text-gray-500">Students</p>
-              </div>
-              <div>
-                <p className="text-lg font-bold text-green-600">{instructor.rating}</p>
-                <p className="text-xs text-gray-500">Rating</p>
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <button className="flex-1 px-3 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm">
-                Message
-              </button>
-              <button className="flex-1 px-3 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg text-sm">
-                View Details
-              </button>
-              {instructor.status === 'Pending' ? (
-                <button className="px-3 py-2 bg-yellow-400 hover:bg-yellow-500 text-black rounded-lg text-sm">
-                  Approve
-                </button>
-              ) : (
-                <button className="px-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm">
-                  Block
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
+          <tbody className="divide-y">
+            {filteredUsers.map((user) => (
+              <tr key={user.id} className="hover:bg-gray-50">
+                <td className="p-3">#{user.id}</td>
+                <td className="p-3 font-medium">{user.name}</td>
+                <td className="p-3">{user.email}</td>
+                <td className="p-3">{user.course}</td>
+                <td className="p-3">
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                      user.status === 'Active'
+                        ? 'bg-green-100 text-green-600'
+                        : user.status === 'Pending'
+                        ? 'bg-yellow-100 text-yellow-600'
+                        : 'bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    {user.status}
+                  </span>
+                </td>
+                <td className="p-3 space-x-2">
+                  <button className="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm">
+                    View
+                  </button>
+                  <button className="px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-black rounded text-sm">
+                    Edit
+                  </button>
+                  <button className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-sm">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
-      {filteredInstructors.length === 0 && (
-        <div className="text-center py-8 text-gray-500">No instructors found</div>
+      {filteredUsers.length === 0 && (
+        <div className="text-center py-8 text-gray-500">No users found</div>
       )}
 
-      {/* Add Instructor Modal */}
+      {/* Add Student Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
-              <h3 className="text-xl font-semibold">Add New Instructor</h3>
+              <h3 className="text-xl font-semibold">Add New Student</h3>
               <button
                 onClick={() => setShowAddModal(false)}
                 className="text-gray-500 hover:text-gray-700 text-2xl"
@@ -212,7 +157,7 @@ const InstructorsPage = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="Enter instructor's full name"
+                    placeholder="Enter student's full name"
                     required
                   />
                 </div>
@@ -227,7 +172,7 @@ const InstructorsPage = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="instructor@example.com"
+                    placeholder="student@example.com"
                     required
                   />
                 </div>
@@ -267,37 +212,20 @@ const InstructorsPage = () => {
                 </div>
               </div>
 
-              {/* Age and Expertise */}
+              {/* Course and Status */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Age <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="number"
-                    name="age"
-                    value={formData.age}
-                    onChange={handleInputChange}
-                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="Enter age"
-                    required
-                    min="18"
-                    max="100"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Expertise <span className="text-red-500">*</span>
+                    Enrolled Course <span className="text-red-500">*</span>
                   </label>
                   <select
-                    name="expertise"
-                    value={formData.expertise}
+                    name="course"
+                    value={formData.course}
                     onChange={handleInputChange}
                     className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
                   >
-                    <option value="">Select expertise</option>
+                    <option value="">Select a course</option>
                     <option value="Web Development">Web Development</option>
                     <option value="Mobile Development">Mobile Development</option>
                     <option value="Data Science">Data Science</option>
@@ -306,25 +234,7 @@ const InstructorsPage = () => {
                     <option value="Cloud Computing">Cloud Computing</option>
                     <option value="Cybersecurity">Cybersecurity</option>
                     <option value="DevOps">DevOps</option>
-                    <option value="Full-stack Development">Full-stack Development</option>
                   </select>
-                </div>
-              </div>
-
-              {/* Bio and Status */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Bio
-                  </label>
-                  <textarea
-                    name="bio"
-                    value={formData.bio}
-                    onChange={handleInputChange}
-                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                    placeholder="Brief bio about the instructor"
-                    rows="3"
-                  />
                 </div>
 
                 <div>
@@ -338,10 +248,41 @@ const InstructorsPage = () => {
                     className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
                   >
+                    <option value="Active">Active</option>
                     <option value="Pending">Pending</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Rejected">Rejected</option>
+                    <option value="Inactive">Inactive</option>
                   </select>
+                </div>
+              </div>
+
+              {/* Enrollment Date and Address */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Enrollment Date <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    name="enrollmentDate"
+                    value={formData.enrollmentDate}
+                    onChange={handleInputChange}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    placeholder="Enter address"
+                  />
                 </div>
               </div>
 
@@ -358,7 +299,7 @@ const InstructorsPage = () => {
                   type="submit"
                   className="px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition"
                 >
-                  Add Instructor
+                  Add Student
                 </button>
               </div>
             </form>
@@ -369,4 +310,4 @@ const InstructorsPage = () => {
   )
 }
 
-export default InstructorsPage
+export default StudentPage

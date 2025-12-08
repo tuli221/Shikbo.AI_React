@@ -50,7 +50,7 @@ const ForgotPasswordPage = () => {
       <header className="p-4 bg-white shadow-sm border-b border-gray-100">
         <div className="max-w-7xl mx-auto">
           <Link to="/">
-            <img src="/assets/download Shikbo.png" alt="Shikhbo.AI Logo" className="h-10" />
+            <img src="/assets/downloadShikbo.png" alt="Shikhbo.AI Logo" className="h-10" />
           </Link>
         </div>
       </header>

@@ -56,7 +56,6 @@ const ChatButton = ({ isOpen, setIsOpen }) => {
         aria-label="Chat with AI Assistant"
       >
         <i className={`fa-solid ${isOpen ? 'fa-x' : 'fa-comments'} text-xl`}></i>
-        <div className="absolute -top-2 -right-2 w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
       </button>
 
       {/* Chat Window */}
