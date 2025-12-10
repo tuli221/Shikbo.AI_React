@@ -81,7 +81,7 @@ const LeaderboardPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar hideLogin={true} />
+      <Navbar />
       
       <main className="flex-1 container mx-auto px-4 py-12 max-w-7xl">
         {/* Hero Section */}
@@ -263,10 +263,8 @@ const LeaderboardPage = () => {
         
       </main>
 
-      <Footer />
-      
-      {/* Chat Button */}
       <ChatButton isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
+      <Footer />
     </div>
   )
 }

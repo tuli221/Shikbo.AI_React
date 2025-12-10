@@ -20,6 +20,7 @@ import StudentDashboard from './page/student/StudentDashboard'
 import LeaderboardPage from './page/LeaderboardPage'
 import PublicInstructorsPage from './page/InstructorsPage'
 import InstructorDashboard from './page/instructor/InstructorDashboard'
+import LearningCenter from './page/LearningCenter'
 
 // Import shared styles (optional) and barrel exports for pages/components
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/course/:courseId" element={<CourseDetailsPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
         <Route path="/instructors" element={<PublicInstructorsPage />} />
+        <Route path="/learning-center" element={<LearningCenter />} />
         
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminLayout />}>

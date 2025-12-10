@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import Navbar from '../component/sections/Header/Navbar'
 import Footer from '../component/sections/Footer/Footer'
+import ChatBot from '../component/ui/ChatBot'
 
 const InstructorsPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedExpertise, setSelectedExpertise] = useState('All Expertise')
+  const [isChatOpen, setIsChatOpen] = useState(false)
 
   const instructors = [
     {
@@ -181,6 +183,7 @@ const InstructorsPage = () => {
         </div>
       )}
 
+      <ChatBot isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
       <Footer />
     </div>
   )

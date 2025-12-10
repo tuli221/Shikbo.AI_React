@@ -32,7 +32,7 @@ const Navbar = ({ hideLogin = false }) => {
       <ul className="hidden md:flex space-x-6 font-medium items-center">
         <li><Link to="/" className={`hover:text-green-500 ${location.pathname === '/' ? 'text-green-500 underline' : ''}`}>Home</Link></li>
         <li><Link to="/courses" className={`hover:text-green-500 ${location.pathname === '/courses' ? 'text-green-500 underline' : ''}`}>Courses</Link></li>
-        <li><a href="#" className="hover:text-green-500">Learning center</a></li>
+        <li><Link to="/learning-center" className={`hover:text-green-500 ${location.pathname === '/learning-center' ? 'text-green-500 underline' : ''}`}>Learning center</Link></li>
         <li><Link to="/instructors" className={`hover:text-green-500 ${location.pathname === '/instructors' ? 'text-green-500 underline' : ''}`}>Instructors</Link></li>
         <li><Link to="/leaderboard" className={`hover:text-green-500 ${location.pathname === '/leaderboard' ? 'text-green-500 underline' : ''}`}>Leaderboard</Link></li>
         {!hideLogin && (
@@ -56,7 +56,7 @@ const Navbar = ({ hideLogin = false }) => {
           <ul className="flex flex-col space-y-4 p-6">
             <li><Link to="/" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/' ? 'text-green-500 underline' : ''}`}>Home</Link></li>
             <li><Link to="/courses" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/courses' ? 'text-green-500 underline' : ''}`}>Courses</Link></li>
-            <li><a href="#" onClick={handleLinkClick} className="hover:text-green-500">Learning center</a></li>
+            <li><Link to="/learning-center" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/learning-center' ? 'text-green-500 underline' : ''}`}>Learning center</Link></li>
             <li><Link to="/instructors" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/instructors' ? 'text-green-500 underline' : ''}`}>Instructors</Link></li>
             <li><Link to="/leaderboard" onClick={handleLinkClick} className={`hover:text-green-500 ${location.pathname === '/leaderboard' ? 'text-green-500 underline' : ''}`}>Leaderboard</Link></li>
             {!hideLogin && (
